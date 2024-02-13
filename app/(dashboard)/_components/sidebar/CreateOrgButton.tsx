@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
-import { CreateOrganization } from "@clerk/nextjs";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import { Hint } from "@/components/Hint";
+import { CustomCreateOrg } from "@/app/(dashboard)/_components/clerkCustom/CustomCreateOrg";
 
 export const CreateOrgButton = () => {
   return (
@@ -26,24 +26,7 @@ export const CreateOrgButton = () => {
         </div>
       </DialogTrigger>
       <DialogContent className={"p-0 border-none max-w-[480px] bg-white"}>
-        <CreateOrganization
-          appearance={{
-            elements: {
-              rootBox: {
-                display: "flex",
-                justifyContent: "center",
-                width: "100%",
-              },
-              card: {
-                width: "unset",
-                maxWidth: "unset",
-                flex: 1,
-                backgroundColor: "transparent",
-                boxShadow: "unset",
-              },
-            },
-          }}
-        />
+        <CustomCreateOrg />
       </DialogContent>
     </Dialog>
   );
