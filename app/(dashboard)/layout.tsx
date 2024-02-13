@@ -1,5 +1,5 @@
 import React from "react";
-import Index from "@/app/(dashboard)/_components/sidebar";
+import Sidebar from "@/app/(dashboard)/_components/sidebar/Sidebar";
 import OrganisationSidebar from "@/app/(dashboard)/_components/OrganisationSidebar";
 import Navbar from "@/app/(dashboard)/_components/Navbar";
 
@@ -10,7 +10,7 @@ interface IDashboardLayoutProps {
 const DashboardLayout: React.FC<IDashboardLayoutProps> = ({ children }) => {
   return (
     <main className={"h-full"}>
-      <Index />
+      <Sidebar />
       <div className={"pl-[60px] h-full"}>
         <div className={"flex gap-x-3 h-full"}>
           <OrganisationSidebar />
