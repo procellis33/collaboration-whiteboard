@@ -1,9 +1,8 @@
 "use client";
-
 import { EmptyOrg } from "@/app/(dashboard)/_components/emptyStates/EmptyOrg";
 import { useOrganization } from "@clerk/nextjs";
 import React from "react";
-import { BoardList } from "@/app/(dashboard)/_components/BoardList";
+import { BoardList } from "@/app/(dashboard)/_components/board/BoardList";
 
 interface IDashboardPageProps {
   searchParams: {
