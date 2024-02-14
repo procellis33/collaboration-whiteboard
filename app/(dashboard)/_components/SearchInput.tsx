@@ -40,7 +40,9 @@ export const SearchInput = () => {
         }
       />
       <Input
-        className={"w-full pl-9 pr-9"}
+        className={
+          "w-full pl-9 pr-9 focus-visible:ring-indigo-300 focus-visible:ring-offset-0 focus-visible:ring"
+        }
         placeholder={"Search boards"}
         onChange={handleChange}
         value={searchQuery}
