@@ -81,7 +81,7 @@ export const BoardList: React.FC<IBoardListProps> = ({ orgId, query }) => {
             authorName={board.authorName}
             createdAt={board._creationTime}
             imageUrl={board.imageUrl}
-            isFavorite={false}
+            isFavorite={board.isFavorite}
           />
         ))}
       </div>
