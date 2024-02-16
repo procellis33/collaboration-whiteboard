@@ -14,7 +14,7 @@ export const useApiMutation = <Mutation extends FunctionReference<"mutation">>(
     return apiMutation(...payload)
       .then((result) => result)
       .catch((e: unknown) => {
-        if (e instanceof Error) throw new Error("Failed to create board");
+        if (e instanceof Error) throw new Error("Operation failed");
         throw new Error("Unknown error occurred");
       })
       .finally(() => setPending(false));
