@@ -9,6 +9,9 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Actions } from "@/components/Actions";
 import { MoreHorizontal } from "lucide-react";
 import { Id } from "@/convex/_generated/dataModel";
+import { useApiMutation } from "@/hooks/useApiMutation";
+import { api } from "@/convex/_generated/api";
+import { toast } from "sonner";
 
 interface IBoardCardProps {
   id: Id<"boards">;
@@ -32,6 +35,18 @@ export const BoardCard: React.FC<IBoardCardProps> & { Skeleton: React.FC } = ({
   title,
 }) => {
   const { userId } = useAuth();
+  const { mutate: onFavorite, pending: pendingFavorite } = useApiMutation(
+    api.board.addFavorite,
+  );
+  const { mutate: onRemoveFavorite, pending: pendingRemoveFavorite } =
+    useApiMutation(api.board.removeFavorite);
+
+  const toggleFavorite = () => {
+    if (isFavorite)
+      onRemoveFavorite({ id }).catch((e) => toast.error(e.message));
+    else onFavorite({ id, orgId }).catch((e) => toast.error(e.message));
+  };
+
   const authorLabel = userId === authorId ? "You" : authorName;
   const createdAtLabel = formatDistanceToNow(createdAt, { addSuffix: true });
 
@@ -64,8 +79,8 @@ export const BoardCard: React.FC<IBoardCardProps> & { Skeleton: React.FC } = ({
           title={title}
           authorLabel={authorLabel}
           createdAtLabel={createdAtLabel}
-          onClick={() => {}}
-          disabled={false}
+          onClick={toggleFavorite}
+          disabled={pendingFavorite || pendingRemoveFavorite}
         />
       </div>
     </Link>
