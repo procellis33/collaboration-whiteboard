@@ -1,9 +1,11 @@
+"use client";
 import React from "react";
 import { cn } from "@/lib/utils";
 import { Plus } from "lucide-react";
 import { useApiMutation } from "@/hooks/useApiMutation";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface INewOrgButtonProps {
   orgId: string;
@@ -13,6 +15,7 @@ export const NewOrgButton: React.FC<INewOrgButtonProps> = ({
   orgId,
   disabled,
 }) => {
+  const router = useRouter();
   const { pending, mutate } = useApiMutation(api.board.create);
 
   const handleClick = () => {
@@ -20,7 +23,10 @@ export const NewOrgButton: React.FC<INewOrgButtonProps> = ({
       orgId: orgId,
       title: "Untitled",
     })
-      .then(() => toast.success("Board created"))
+      .then((id) => {
+        toast.success("Board created");
+        router.push(`/board/${id}`);
+      })
       .catch((e) => toast.error(e.message));
   };
 
