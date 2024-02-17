@@ -15,7 +15,10 @@ interface IBoardListProps {
 }
 
 export const BoardList: React.FC<IBoardListProps> = ({ orgId, query }) => {
-  const data = useQuery(api.boards.get, { orgId });
+  const data = useQuery(api.boards.get, {
+    orgId,
+    favorites: !!query.favorites,
+  });
 
   // * Null if data doesn't exist. Undefined in convex is for loading state only
   if (data === undefined) {
@@ -81,7 +84,7 @@ export const BoardList: React.FC<IBoardListProps> = ({ orgId, query }) => {
             authorName={board.authorName}
             createdAt={board._creationTime}
             imageUrl={board.imageUrl}
-            isFavorite={false}
+            isFavorite={board.isFavorite}
           />
         ))}
       </div>
