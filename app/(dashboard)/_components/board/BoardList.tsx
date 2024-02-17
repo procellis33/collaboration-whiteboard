@@ -74,19 +74,24 @@ export const BoardList: React.FC<IBoardListProps> = ({ orgId, query }) => {
         }
       >
         <NewOrgButton orgId={orgId} />
-        {data?.map((board) => (
-          <BoardCard
-            key={board._id}
-            id={board._id}
-            title={board.title}
-            orgId={board.orgId}
-            authorId={board.authorId}
-            authorName={board.authorName}
-            createdAt={board._creationTime}
-            imageUrl={board.imageUrl}
-            isFavorite={board.isFavorite}
-          />
-        ))}
+        {data?.map((board) => {
+          // * Every string includes "", so everything will be shown
+          const search = query.search || "";
+          if (board.title.toLowerCase().includes(search.toLowerCase()))
+            return (
+              <BoardCard
+                key={board._id}
+                id={board._id}
+                title={board.title}
+                orgId={board.orgId}
+                authorId={board.authorId}
+                authorName={board.authorName}
+                createdAt={board._creationTime}
+                imageUrl={board.imageUrl}
+                isFavorite={board.isFavorite}
+              />
+            );
+        })}
       </div>
     </div>
   );
