@@ -13,7 +13,7 @@ const font = Poppins({
   weight: ["600"],
 });
 
-export const Info: React.FC = () => {
+export const Info: React.FC & { Skeleton: React.FC } = () => {
   return (
     <div
       className={
@@ -51,3 +51,15 @@ export const Info: React.FC = () => {
     </div>
   );
 };
+
+const InfoSkeleton = () => {
+  return (
+    <div
+      className={
+        "absolute top-2 left-2 bg-white rounded-md px-[0.225rem] h-[2.85rem] shadow-md flex items-center w-[100px] sm:w-[200px] md:w-[300px] animate-pulse"
+      }
+    />
+  );
+};
+
+Info.Skeleton = InfoSkeleton;
