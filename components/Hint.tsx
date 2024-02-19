@@ -33,7 +33,7 @@ export const Hint: React.FC<IHintProps> = ({
           alignOffset={alignOffset}
           sideOffset={sideOffset}
         >
-          <p className={"font-semibold capitalize"}>{label}</p>
+          <p className={"font-semibold"}>{label}</p>
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
