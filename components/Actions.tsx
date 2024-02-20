@@ -15,6 +15,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { Button } from "@/components/ui/button";
 import { useRenameModal } from "@/store/useRenameModal";
+import { useRouter } from "next/navigation";
 
 interface IActionProps {
   id: Id<"boards">;
@@ -22,6 +23,7 @@ interface IActionProps {
   children: React.ReactNode;
   side?: DropdownMenuContentProps["side"];
   sideOffset?: DropdownMenuContentProps["sideOffset"];
+  redirectHomeOnDelete?: boolean;
 }
 
 export const Actions: React.FC<IActionProps> = ({
@@ -30,9 +32,11 @@ export const Actions: React.FC<IActionProps> = ({
   sideOffset,
   children,
   title,
+  redirectHomeOnDelete,
 }) => {
   const { pending, mutate } = useApiMutation(api.board.remove);
   const { onOpen } = useRenameModal();
+  const router = useRouter();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const handleDialogItemOpenChange = (open: boolean) => {
@@ -48,7 +52,10 @@ export const Actions: React.FC<IActionProps> = ({
 
   const onDelete = () => {
     mutate({ id })
-      .then(() => toast.success("Board deleted"))
+      .then(() => {
+        toast.success("Board deleted");
+        if (redirectHomeOnDelete) router.replace("/");
+      })
       .catch((e) => toast.error(e.message));
   };
 
