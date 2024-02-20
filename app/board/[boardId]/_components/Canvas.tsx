@@ -10,11 +10,11 @@ interface ICanvasProps {
   boardId: string;
 }
 
-export const Canvas: React.FC<ICanvasProps> = () => {
+export const Canvas: React.FC<ICanvasProps> = ({ boardId }) => {
   const info = useSelf((me) => me.info);
   return (
     <main className={"h-full w-full relative bg-neutral-100 touch-none"}>
-      <Info />
+      <Info boardId={boardId} />
       <Participants />
       <Toolbar />
     </main>

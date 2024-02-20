@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
 import { Hint } from "@/components/Hint";
@@ -7,13 +9,27 @@ import { cn } from "@/lib/utils";
 import { Poppins } from "next/font/google";
 import { AlignJustify } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import { useQuery } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import { useRenameModal } from "@/store/useRenameModal";
+import { Actions } from "@/components/Actions";
 
 const font = Poppins({
   subsets: ["latin"],
   weight: ["600"],
 });
 
-export const Info: React.FC = () => {
+interface IInfoProps {
+  boardId: string;
+}
+
+export const Info: React.FC<IInfoProps> = ({ boardId }) => {
+  const data = useQuery(api.board.get, { id: boardId as Id<"boards"> });
+  const { onOpen } = useRenameModal();
+
+  if (!data) return <InfoSkeleton />;
+
   return (
     <div
       className={
@@ -35,19 +51,34 @@ export const Info: React.FC = () => {
 
       <Separator orientation={"vertical"} className={"h-7 mr-2 ml-2"} />
 
-      <Hint label={"Board settings"} side={"bottom"} sideOffset={10}>
-        <Button asChild variant={"canvas"} className={"px-2"}>
-          <div className={"text-lg text-black"}>Title</div>
+      <Hint label={"Rename board"} side={"bottom"} sideOffset={10}>
+        <Button
+          asChild
+          variant={"canvas"}
+          className={"px-2"}
+          onClick={() => onOpen(data._id, data.title)}
+        >
+          <div className={"text-lg text-black"}>{data.title}</div>
         </Button>
       </Hint>
 
       <Separator orientation={"vertical"} className={"h-7 mr-2 ml-2"} />
 
-      <Hint label={"Main menu"} side={"bottom"} sideOffset={10}>
-        <Button asChild variant={"canvas"} className={"px-2"}>
-          <AlignJustify width={38} />
-        </Button>
-      </Hint>
+      <Actions
+        id={data._id}
+        title={data.title}
+        side={"bottom"}
+        sideOffset={10}
+        redirectHomeOnDelete
+      >
+        <div>
+          <Hint label={"Main menu"} side={"bottom"} sideOffset={10}>
+            <Button asChild variant={"canvas"} size={"icon"} className={"px-2"}>
+              <AlignJustify />
+            </Button>
+          </Hint>
+        </div>
+      </Actions>
     </div>
   );
 };
