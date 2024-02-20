@@ -1,7 +1,7 @@
 import React from "react";
 import { User } from "lucide-react";
 
-export const Participants: React.FC & { Skeleton: React.FC } = () => {
+export const Participants: React.FC = () => {
   return (
     <div
       className={
@@ -15,7 +15,7 @@ export const Participants: React.FC & { Skeleton: React.FC } = () => {
   );
 };
 
-const ParticipantsSkeleton = () => {
+export const ParticipantsSkeleton: React.FC = () => {
   return (
     <div
       className={
@@ -24,5 +24,3 @@ const ParticipantsSkeleton = () => {
     />
   );
 };
-
-Participants.Skeleton = ParticipantsSkeleton;
