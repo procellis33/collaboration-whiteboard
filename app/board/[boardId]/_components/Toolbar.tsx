@@ -3,7 +3,7 @@ import { Pencil, Circle, Square, PenLine, Undo, Redo } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Hint } from "@/components/Hint";
 
-export const Toolbar: React.FC & { Skeleton: React.FC } = () => {
+export const Toolbar: React.FC = () => {
   return (
     <div
       className={
@@ -60,7 +60,7 @@ export const Toolbar: React.FC & { Skeleton: React.FC } = () => {
   );
 };
 
-const ToolbarSkeleton = () => {
+export const ToolbarSkeleton: React.FC = () => {
   return (
     <div
       className={
@@ -80,5 +80,3 @@ const ToolbarSkeleton = () => {
     </div>
   );
 };
-
-Toolbar.Skeleton = ToolbarSkeleton;
