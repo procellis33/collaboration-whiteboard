@@ -1,5 +1,5 @@
 import { v } from "convex/values";
-import { mutation } from "./_generated/server";
+import { mutation, query } from "./_generated/server";
 import { getRandomInt } from "../lib/getRandomInt";
 
 const images = [
@@ -134,5 +134,12 @@ export const removeFavorite = mutation({
     if (!existingFavorite) throw new Error("Board was not favorite");
 
     return await ctx.db.delete(existingFavorite._id);
+  },
+});
+
+export const get = query({
+  args: { id: v.id("boards") },
+  handler: async (ctx, args) => {
+    return await ctx.db.get(args.id);
   },
 });
