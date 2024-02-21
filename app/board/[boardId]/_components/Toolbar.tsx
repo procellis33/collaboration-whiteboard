@@ -1,9 +1,34 @@
 import React from "react";
-import { Pencil, Circle, Square, PenLine, Undo, Redo } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Hint } from "@/components/Hint";
+import {
+  Pencil,
+  Circle,
+  Square,
+  StickyNote,
+  Type,
+  Undo,
+  Redo,
+  MousePointer2,
+} from "lucide-react";
+import { ToolButton } from "@/app/board/[boardId]/_components/ToolButton";
+import { ECanvasMode, TCanvasState, ELayerType } from "@/types/canvas";
 
-export const Toolbar: React.FC = () => {
+interface IToolbarProps {
+  canvasState: TCanvasState;
+  setCanvasState: (newState: TCanvasState) => void;
+  undo: () => void;
+  redo: () => void;
+  canUndo: boolean;
+  canRedo: boolean;
+}
+
+export const Toolbar: React.FC<IToolbarProps> = ({
+  canvasState,
+  setCanvasState,
+  canRedo,
+  redo,
+  canUndo,
+  undo,
+}) => {
   return (
     <div
       className={
@@ -15,46 +40,107 @@ export const Toolbar: React.FC = () => {
           "bg-white rounded-md p-1 flex gap-y-0.5 flex-col items-center shadow-md"
         }
       >
-        <Hint label={"Tool"} side={"right"} sideOffset={10} align={"center"}>
-          <Button variant={"canvas"} className={"px-1.5"}>
-            <Pencil />
-          </Button>
-        </Hint>
+        <ToolButton
+          label="Select"
+          icon={MousePointer2}
+          onClick={() =>
+            setCanvasState({
+              mode: ECanvasMode.None,
+            })
+          }
+          isActive={
+            canvasState.mode === ECanvasMode.None ||
+            canvasState.mode === ECanvasMode.Translating ||
+            canvasState.mode === ECanvasMode.SelectionNet ||
+            canvasState.mode === ECanvasMode.Pressing ||
+            canvasState.mode === ECanvasMode.Resizing
+          }
+        />
 
-        <Hint label={"Tool"} side={"right"} sideOffset={10} align={"center"}>
-          <Button variant={"canvas"} className={"px-1.5"}>
-            <Circle />
-          </Button>
-        </Hint>
-
-        <Hint label={"Tool"} side={"right"} sideOffset={10} align={"center"}>
-          <Button variant={"canvas"} className={"px-1.5"}>
-            <Square />
-          </Button>
-        </Hint>
-
-        <Hint label={"Tool"} side={"right"} sideOffset={10} align={"center"}>
-          <Button variant={"canvas"} className={"px-1.5"}>
-            <PenLine />
-          </Button>
-        </Hint>
+        <ToolButton
+          label="Text"
+          icon={Type}
+          onClick={() =>
+            setCanvasState({
+              mode: ECanvasMode.Inserting,
+              layerType: ELayerType.Text,
+            })
+          }
+          isActive={
+            canvasState.mode === ECanvasMode.Inserting &&
+            canvasState.layerType === ELayerType.Text
+          }
+        />
+        <ToolButton
+          label="Sticky note"
+          icon={StickyNote}
+          onClick={() =>
+            setCanvasState({
+              mode: ECanvasMode.Inserting,
+              layerType: ELayerType.Note,
+            })
+          }
+          isActive={
+            canvasState.mode === ECanvasMode.Inserting &&
+            canvasState.layerType === ELayerType.Note
+          }
+        />
+        <ToolButton
+          label="Rectangle"
+          icon={Square}
+          onClick={() =>
+            setCanvasState({
+              mode: ECanvasMode.Inserting,
+              layerType: ELayerType.Rectangle,
+            })
+          }
+          isActive={
+            canvasState.mode === ECanvasMode.Inserting &&
+            canvasState.layerType === ELayerType.Rectangle
+          }
+        />
+        <ToolButton
+          label="Ellipse"
+          icon={Circle}
+          onClick={() =>
+            setCanvasState({
+              mode: ECanvasMode.Inserting,
+              layerType: ELayerType.Ellipse,
+            })
+          }
+          isActive={
+            canvasState.mode === ECanvasMode.Inserting &&
+            canvasState.layerType === ELayerType.Ellipse
+          }
+        />
+        <ToolButton
+          label="Pen"
+          icon={Pencil}
+          onClick={() =>
+            setCanvasState({
+              mode: ECanvasMode.Pencil,
+            })
+          }
+          isActive={canvasState.mode === ECanvasMode.Pencil}
+        />
       </div>
       <div
         className={
           "bg-white rounded-md p-1 flex gap-y-0.5 flex-col items-center shadow-md"
         }
       >
-        <Hint label={"Tool"} side={"right"} sideOffset={10} align={"center"}>
-          <Button variant={"canvas"} className={"px-1.5"}>
-            <Undo />
-          </Button>
-        </Hint>
-
-        <Hint label={"Tool"} side={"right"} sideOffset={10} align={"center"}>
-          <Button variant={"canvas"} className={"px-1.5"}>
-            <Redo />
-          </Button>
-        </Hint>
+        <ToolButton
+          label="Undo"
+          icon={Undo}
+          onClick={undo}
+          isDisabled={!canUndo}
+        />
+        <ToolButton
+          label="Redo"
+          icon={Redo}
+          onClick={redo}
+          isDisabled={!canRedo}
+        />
       </div>
     </div>
   );
