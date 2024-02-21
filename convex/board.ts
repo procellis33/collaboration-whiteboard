@@ -1,6 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
-import { getRandomInt } from "../lib/getRandomInt";
+import { getRandomInt } from "../lib/utils/getRandomInt";
 
 const images = [
   "/placeholders/1.svg",
