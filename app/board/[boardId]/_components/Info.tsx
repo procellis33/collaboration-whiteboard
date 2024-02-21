@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Hint } from "@/components/Hint";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/twMerge";
 import { Poppins } from "next/font/google";
 import { AlignJustify } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
