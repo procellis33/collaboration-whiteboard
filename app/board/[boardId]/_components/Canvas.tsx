@@ -89,7 +89,7 @@ export const Canvas: React.FC<ICanvasProps> = ({ boardId }) => {
       const current = pointerEventToCanvasPoint(e, camera);
       setMyPresence({ cursor: current });
     },
-    [],
+    [camera],
   );
 
   const onPointerLeave = useMutation(({ setMyPresence }) => {
