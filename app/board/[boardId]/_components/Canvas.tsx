@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Info } from "@/app/board/[boardId]/_components/Info";
 import { Participants } from "@/app/board/[boardId]/_components/Participants";
 import { Toolbar } from "@/app/board/[boardId]/_components/Toolbar";
