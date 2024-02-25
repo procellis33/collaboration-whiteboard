@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Info } from "@/app/board/[boardId]/_components/Info";
 import { Participants } from "@/app/board/[boardId]/_components/Participants";
 import { Toolbar } from "@/app/board/[boardId]/_components/Toolbar";
@@ -89,7 +89,7 @@ export const Canvas: React.FC<ICanvasProps> = ({ boardId }) => {
       const current = pointerEventToCanvasPoint(e, camera);
       setMyPresence({ cursor: current });
     },
-    [],
+    [camera],
   );
 
   const onPointerLeave = useMutation(({ setMyPresence }) => {
