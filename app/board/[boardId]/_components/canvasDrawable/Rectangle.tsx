@@ -1,5 +1,6 @@
 import { TRectangleLayer } from "@/types/canvas";
 import React from "react";
+import { rgbToHex } from "@/lib/utils/colorToCss";
 
 interface IRectangleProps {
   id: string;
@@ -28,7 +29,7 @@ export const Rectangle: React.FC<IRectangleProps> = ({
       width={width}
       height={height}
       strokeWidth={1}
-      fill={"#000"}
+      fill={fill ? rgbToHex(fill) : "#CCC"}
       stroke={selectionColor || "transparent"}
     />
   );
