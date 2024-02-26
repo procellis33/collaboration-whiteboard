@@ -1,24 +1,13 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { Hint } from "@/components/Hint";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { cn } from "@/lib/utils/twMerge";
-import { Poppins } from "next/font/google";
 import { AlignJustify } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { useRenameModal } from "@/store/useRenameModal";
 import { Actions } from "@/components/Actions";
-
-const font = Poppins({
-  subsets: ["latin"],
-  weight: ["600"],
-});
 
 interface IInfoProps {
   boardId: string;

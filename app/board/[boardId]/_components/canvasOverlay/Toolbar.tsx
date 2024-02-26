@@ -5,8 +5,6 @@ import {
   Square,
   StickyNote,
   Type,
-  Undo,
-  Redo,
   MousePointer2,
 } from "lucide-react";
 import { ToolButton } from "@/app/board/[boardId]/_components/canvasOverlay/ToolButton";
