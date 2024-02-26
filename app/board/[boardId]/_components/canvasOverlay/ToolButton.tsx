@@ -19,7 +19,7 @@ export const ToolButton: React.FC<TToolButtonProps> = ({
   isDisabled,
 }) => {
   return (
-    <Hint label={label} side="right" sideOffset={10}>
+    <Hint label={label} side="bottom" sideOffset={10}>
       <Button
         className={"px-1.5"}
         disabled={isDisabled}

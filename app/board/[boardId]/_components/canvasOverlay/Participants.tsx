@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { UserAvatar } from "@/app/board/[boardId]/_components/userAvatar";
+import { UserAvatar } from "@/app/board/[boardId]/_components/canvasOverlay/userAvatar";
 import { useOthers, useSelf } from "@/liveblocks.config";
 import { idToColor } from "@/lib/utils/idToColor";
 
@@ -13,7 +13,7 @@ export const Participants: React.FC = () => {
   return (
     <div
       className={
-        "absolute top-2 right-2 bg-white rounded-md p-3 h-[2.85rem] flex items-center shadow-md"
+        "absolute top-2 right-2 bg-white rounded-md p-3 h-canvas flex items-center shadow-md"
       }
     >
       <div className={"flex gap-x-2"}>
@@ -53,7 +53,7 @@ export const ParticipantsSkeleton: React.FC = () => {
   return (
     <div
       className={
-        "absolute top-2 right-2 bg-white rounded-md p-3 h-[2.85rem] flex items-center shadow-md w-[70px] sm:w-[100px] animate-pulse"
+        "absolute top-2 right-2 bg-white rounded-md p-3 h-canvas flex items-center shadow-md w-[70px] animate-pulse"
       }
     />
   );

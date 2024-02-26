@@ -1,7 +1,9 @@
 import { Loader } from "lucide-react";
-import { InfoSkeleton } from "@/app/board/[boardId]/_components/Info";
-import { ParticipantsSkeleton } from "@/app/board/[boardId]/_components/Participants";
-import { ToolbarSkeleton } from "@/app/board/[boardId]/_components/Toolbar";
+import { InfoSkeleton } from "@/app/board/[boardId]/_components/canvasOverlay/Info";
+import { ParticipantsSkeleton } from "@/app/board/[boardId]/_components/canvasOverlay/Participants";
+import { ToolbarSkeleton } from "@/app/board/[boardId]/_components/canvasOverlay/Toolbar";
+import { HistoryActionsSkeleton } from "@/app/board/[boardId]/_components/canvasOverlay/HistoryActions";
+import { ZoomSkeleton } from "@/app/board/[boardId]/_components/canvasOverlay/Zoom";
 
 export const CanvasLoading = () => {
   return (
@@ -12,8 +14,10 @@ export const CanvasLoading = () => {
     >
       <Loader className={"h-6 w-6 text-muted-foreground animate-spin"} />
       <InfoSkeleton />
+      <HistoryActionsSkeleton />
       <ParticipantsSkeleton />
       <ToolbarSkeleton />
+      <ZoomSkeleton />
     </main>
   );
 };
