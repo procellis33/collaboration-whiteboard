@@ -16,6 +16,7 @@ import { ConfirmModal } from "@/components/ConfirmModal";
 import { Button } from "@/components/ui/button";
 import { useRenameModal } from "@/store/useRenameModal";
 import { useRouter } from "next/navigation";
+import { twMerge } from "tailwind-merge";
 
 interface IActionProps {
   id: Id<"boards">;
@@ -24,6 +25,7 @@ interface IActionProps {
   side?: DropdownMenuContentProps["side"];
   sideOffset?: DropdownMenuContentProps["sideOffset"];
   redirectHomeOnDelete?: boolean;
+  className?: string;
 }
 
 export const Actions: React.FC<IActionProps> = ({
@@ -33,6 +35,7 @@ export const Actions: React.FC<IActionProps> = ({
   children,
   title,
   redirectHomeOnDelete,
+  className,
 }) => {
   const { pending, mutate } = useApiMutation(api.board.remove);
   const { onOpen } = useRenameModal();
@@ -66,7 +69,7 @@ export const Actions: React.FC<IActionProps> = ({
         sideOffset={sideOffset}
         side={side}
         onClick={(e) => e.stopPropagation()}
-        className={"w-60"}
+        className={twMerge("w-60", className)}
       >
         <DropdownMenuItem className={"p-3 cursor-pointer"} onClick={onCopyLink}>
           <Link2 className={"h-4 w-4 mr-2"} />
