@@ -18,6 +18,12 @@ const config = {
       },
     },
     extend: {
+      height: {
+        canvas: "2.85rem",
+      },
+      spacing: {
+        canvas: "0.225rem",
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

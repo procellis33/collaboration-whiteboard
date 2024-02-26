@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useCallback, useState } from "react";
-import { Info } from "@/app/board/[boardId]/_components/Info";
-import { Participants } from "@/app/board/[boardId]/_components/Participants";
-import { Toolbar } from "@/app/board/[boardId]/_components/Toolbar";
+import { Info } from "@/app/board/[boardId]/_components/canvasOverlay/Info";
+import { Participants } from "@/app/board/[boardId]/_components/canvasOverlay/Participants";
+import { Toolbar } from "@/app/board/[boardId]/_components/canvasOverlay/Toolbar";
 import {
   useCanRedo,
   useCanUndo,
@@ -23,7 +23,11 @@ import { CursorsPresence } from "@/app/board/[boardId]/_components/CursorsPresen
 import { pointerEventToCanvasPoint } from "@/lib/utils/pointerEventToCanvasPoint";
 import { nanoid } from "nanoid";
 import { LiveObject } from "@liveblocks/client";
-import { LayerPreview } from "@/app/board/[boardId]/_components/LayerPreview";
+import { LayerPreview } from "@/app/board/[boardId]/_components/canvasDrawable/LayerPreview";
+import useDeviceParams from "@/hooks/useDeviceParams";
+import { Zoom } from "@/app/board/[boardId]/_components/canvasOverlay/Zoom";
+import { twMerge } from "tailwind-merge";
+import { HistoryActions } from "@/app/board/[boardId]/_components/canvasOverlay/HistoryActions";
 
 const MAX_LAYERS = 1000;
 
@@ -42,10 +46,19 @@ export const Canvas: React.FC<ICanvasProps> = ({ boardId }) => {
     g: 0,
     b: 0,
   });
+  const [isWheelPressed, setIsWheelPressed] = useState(false);
+  const [initialMousePosition, setInitialMousePosition] = useState({
+    x: 0,
+    y: 0,
+  });
+
+  const [scale, setScale] = useState(1);
 
   const history = useHistory();
   const canUndo = useCanUndo();
   const canRedo = useCanRedo();
+
+  const deviceParams = useDeviceParams();
 
   const insertLayer = useMutation(
     (
@@ -75,7 +88,35 @@ export const Canvas: React.FC<ICanvasProps> = ({ boardId }) => {
     [lastUsedColor],
   );
 
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (e.button === 1) {
+      // Button 1 is the mouse wheel button
+      setIsWheelPressed(true);
+      setInitialMousePosition({ x: e.clientX, y: e.clientY });
+    }
+  };
+
+  const onMouseUp = () => {
+    setIsWheelPressed(false);
+  };
+
+  const onMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (isWheelPressed) {
+        const deltaX = initialMousePosition.x - e.clientX;
+        const deltaY = initialMousePosition.y - e.clientY;
+        setInitialMousePosition({ x: e.clientX, y: e.clientY });
+        setCamera((camera) => ({
+          x: camera.x - deltaX,
+          y: camera.y - deltaY,
+        }));
+      }
+    },
+    [isWheelPressed, initialMousePosition.x, initialMousePosition.y],
+  );
+
   const onWheel = useCallback((e: React.WheelEvent) => {
+    if (e.ctrlKey) return;
     setCamera((camera) => ({
       x: camera.x - e.deltaX,
       y: camera.y - e.deltaY,
@@ -86,10 +127,10 @@ export const Canvas: React.FC<ICanvasProps> = ({ boardId }) => {
     ({ setMyPresence }, e: React.PointerEvent) => {
       e.preventDefault();
 
-      const current = pointerEventToCanvasPoint(e, camera);
+      const current = pointerEventToCanvasPoint(e, camera, scale);
       setMyPresence({ cursor: current });
     },
-    [camera],
+    [camera, scale],
   );
 
   const onPointerLeave = useMutation(({ setMyPresence }) => {
@@ -97,8 +138,9 @@ export const Canvas: React.FC<ICanvasProps> = ({ boardId }) => {
   }, []);
 
   const onPointerUp = useMutation(
-    ({}, e) => {
-      const point = pointerEventToCanvasPoint(e, camera);
+    ({}, e: React.PointerEvent) => {
+      if (e.button !== 0) return;
+      const point = pointerEventToCanvasPoint(e, camera, scale);
       if (canvasState.mode === ECanvasMode.Inserting) {
         insertLayer(canvasState.layerType, point);
       } else setCanvasState({ mode: ECanvasMode.None });
@@ -111,20 +153,31 @@ export const Canvas: React.FC<ICanvasProps> = ({ boardId }) => {
     <main className={"h-full w-full relative bg-neutral-100 touch-none"}>
       <Info boardId={boardId} />
       <Participants />
-      <Toolbar
-        canvasState={canvasState}
-        setCanvasState={setCanvasState}
+      <Toolbar canvasState={canvasState} setCanvasState={setCanvasState} />
+      <HistoryActions
         canRedo={canRedo}
         canUndo={canUndo}
         undo={history.undo}
         redo={history.redo}
       />
+      <Zoom setScale={setScale} scale={scale} />
       <svg
-        className={"h-[100vh] w-[100vw]"}
+        className={twMerge(
+          "h-[100vh] w-[100vw]",
+          isWheelPressed && "cursor-grab",
+        )}
         onWheel={onWheel}
-        onPointerMove={onPointerMove}
+        viewBox={`0 0 ${deviceParams.width * scale} ${deviceParams.height * scale}`}
+        onPointerMove={(e) => {
+          onPointerMove(e);
+          onMouseMove(e);
+        }}
         onPointerLeave={onPointerLeave}
-        onPointerUp={onPointerUp}
+        onPointerUp={(e) => {
+          onPointerUp(e);
+          onMouseUp();
+        }}
+        onPointerDown={onMouseDown}
       >
         <g
           style={{

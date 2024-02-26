@@ -2,7 +2,7 @@
 import React, { memo } from "react";
 import { useStorage } from "@/liveblocks.config";
 import { ELayerType } from "@/types/canvas";
-import { Rectangle } from "@/app/board/[boardId]/_components/Rectangle";
+import { Rectangle } from "@/app/board/[boardId]/_components/canvasDrawable/Rectangle";
 
 interface ILayerPreviewProps {
   id: string;
