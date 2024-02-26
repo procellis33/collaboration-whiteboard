@@ -1,6 +1,6 @@
 "use client";
 
-import React, { SetStateAction, useCallback, useEffect } from "react";
+import React, { SetStateAction, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Hint } from "@/components/Hint";
 import { ZoomIn, ZoomOut } from "lucide-react";
