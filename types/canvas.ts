@@ -9,6 +9,19 @@ export type TCamera = {
   y: number;
 };
 
+export enum EStrokeDasharray {
+  Solid = 0,
+  Dotted = 5,
+  Dashed = 8,
+}
+
+export enum EStrokeWidth {
+  None = 0,
+  Thin = 2,
+  Medium = 4,
+  ExtraBold = 6,
+}
+
 export enum ELayerType {
   Rectangle,
   Ellipse,
@@ -24,6 +37,11 @@ export type TRectangleLayer = {
   height: number;
   width: number;
   fill: TColor;
+  fillOpacity: number;
+  stroke?: TColor;
+  strokeOpacity?: number;
+  strokeDasharray?: EStrokeDasharray;
+  strokeWidth?: EStrokeWidth;
   value?: string;
 };
 
@@ -34,6 +52,11 @@ export type TEllipseLayer = {
   height: number;
   width: number;
   fill: TColor;
+  fillOpacity: number;
+  stroke?: TColor;
+  strokeOpacity?: number;
+  strokeDasharray?: EStrokeDasharray;
+  strokeWidth?: EStrokeWidth;
   value?: string;
 };
 
@@ -44,6 +67,11 @@ export type TPathLayer = {
   height: number;
   width: number;
   fill: TColor;
+  fillOpacity: number;
+  stroke?: TColor;
+  strokeOpacity?: number;
+  strokeDasharray?: EStrokeDasharray;
+  strokeWidth?: EStrokeWidth;
   points: number[][];
   value?: string;
 };
@@ -55,6 +83,11 @@ export type TTextLayer = {
   height: number;
   width: number;
   fill: TColor;
+  fillOpacity: number;
+  stroke?: TColor;
+  strokeOpacity?: number;
+  strokeDasharray?: EStrokeDasharray;
+  strokeWidth?: EStrokeWidth;
   value?: string;
 };
 
@@ -65,6 +98,11 @@ export type TNoteLayer = {
   height: number;
   width: number;
   fill: TColor;
+  fillOpacity: number;
+  stroke?: TColor;
+  strokeOpacity?: number;
+  strokeDasharray?: EStrokeDasharray;
+  strokeWidth?: EStrokeWidth;
   value?: string;
 };
 

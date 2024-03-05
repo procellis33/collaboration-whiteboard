@@ -5,7 +5,7 @@ import {
   LiveObject,
 } from "@liveblocks/client";
 import { createRoomContext } from "@liveblocks/react";
-import { TLayer } from "@/types/canvas";
+import { TColor, TLayer } from "@/types/canvas";
 
 const client = createClient({
   authEndpoint: "/api/liveblocks-auth",
@@ -18,7 +18,8 @@ const client = createClient({
 type Presence = {
   cursor: { x: number; y: number } | null;
   selection: string[];
-  // ...
+  pencilDraft: [x: number, y: number, pressure: number][] | null;
+  penColor: TColor | null;
 };
 
 // Optionally, Storage represents the shared document that persists in the

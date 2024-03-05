@@ -1,4 +1,6 @@
+"use client";
 import { useState, useLayoutEffect } from "react";
+import { debounce } from "@/lib/utils/debounce";
 
 interface IDeviceParams {
   width: number;
@@ -19,18 +21,10 @@ const useDeviceParams = (): IDeviceParams => {
       });
     };
 
-    let debounceTimer: string | number | NodeJS.Timeout | undefined;
-    const debouncedUpdate = (): void => {
-      clearTimeout(debounceTimer);
-      debounceTimer = setTimeout(updateDeviceParams, 200);
-    };
-
-    window.addEventListener("resize", debouncedUpdate);
-
-    updateDeviceParams();
+    window.addEventListener("resize", debounce(updateDeviceParams, 200));
 
     return () => {
-      window.removeEventListener("resize", debouncedUpdate);
+      window.removeEventListener("resize", debounce(updateDeviceParams, 200));
     };
   }, []);
 

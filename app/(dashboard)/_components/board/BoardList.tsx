@@ -6,7 +6,7 @@ import { api } from "@/convex/_generated/api";
 import { BoardCard } from "@/app/(dashboard)/_components/board/boardCard/BoardCard";
 import { NewOrgButton } from "@/app/(dashboard)/_components/board/NewOrgButton";
 
-interface IBoardListProps {
+interface IBoardStatesProps {
   orgId: string;
   query: {
     search?: string;
@@ -14,7 +14,7 @@ interface IBoardListProps {
   };
 }
 
-export const BoardList: React.FC<IBoardListProps> = ({ orgId, query }) => {
+export const BoardList: React.FC<IBoardStatesProps> = ({ orgId, query }) => {
   const data = useQuery(api.boards.get, {
     orgId,
     favorites: !!query.favorites,
@@ -43,7 +43,12 @@ export const BoardList: React.FC<IBoardListProps> = ({ orgId, query }) => {
     );
   }
 
-  if (!data?.length && query.search)
+  if (
+    query.search &&
+    !data.some(
+      (item) => query.search && item.title.toLowerCase().includes(query.search),
+    )
+  )
     return (
       <EmptyState
         header={"No results found"}
@@ -74,7 +79,7 @@ export const BoardList: React.FC<IBoardListProps> = ({ orgId, query }) => {
         }
       >
         <NewOrgButton orgId={orgId} />
-        {data?.map((board) => {
+        {data.map((board) => {
           // * Every string includes "", so everything will be shown
           const search = query.search || "";
           if (board.title.toLowerCase().includes(search.toLowerCase()))

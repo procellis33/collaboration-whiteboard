@@ -1,5 +1,7 @@
 import { TRectangleLayer } from "@/types/canvas";
 import React from "react";
+import { rgbToHex } from "@/lib/utils/rgbToHex";
+import { INITIAL_LAYER_STROKE_COLOR } from "@/lib/consts";
 
 interface IRectangleProps {
   id: string;
@@ -14,22 +16,52 @@ export const Rectangle: React.FC<IRectangleProps> = ({
   layer,
   onPointerDown,
 }) => {
-  const { x, y, width, height, fill } = layer;
+  const {
+    x,
+    y,
+    width,
+    height,
+    fill,
+    fillOpacity,
+    strokeOpacity,
+    stroke,
+    strokeDasharray,
+    strokeWidth,
+  } = layer;
 
   return (
-    <rect
-      className="drop-shadow-md"
-      onPointerDown={(e) => onPointerDown(e, id)}
-      style={{
-        transform: `translate(${x}px, ${y}px)`,
-      }}
-      x={0}
-      y={0}
-      width={width}
-      height={height}
-      strokeWidth={1}
-      fill={"#000"}
-      stroke={selectionColor || "transparent"}
-    />
+    <>
+      {strokeOpacity !== 0 && (
+        <rect
+          style={{
+            transform: `translate(${x}px, ${y}px)`,
+          }}
+          x={0}
+          y={0}
+          width={width}
+          height={height}
+          strokeWidth={strokeWidth}
+          fillOpacity={0}
+          strokeDasharray={strokeDasharray}
+          strokeOpacity={strokeOpacity}
+          stroke={rgbToHex(stroke || INITIAL_LAYER_STROKE_COLOR)}
+        />
+      )}
+      <rect
+        className="drop-shadow-md cursor-all-scroll"
+        onPointerDown={(e) => onPointerDown(e, id)}
+        style={{
+          transform: `translate(${x}px, ${y}px)`,
+        }}
+        x={0}
+        y={0}
+        width={width}
+        height={height}
+        strokeWidth={1}
+        fillOpacity={fillOpacity}
+        fill={rgbToHex(fill)}
+        stroke={selectionColor || "transparent"}
+      />
+    </>
   );
 };

@@ -6,6 +6,7 @@ import React from "react";
 interface TToolButtonProps {
   label: string;
   icon: LucideIcon;
+  shortcut?: string;
   onClick: () => void;
   isActive?: boolean;
   isDisabled?: boolean;
@@ -17,11 +18,12 @@ export const ToolButton: React.FC<TToolButtonProps> = ({
   onClick,
   isActive,
   isDisabled,
+  shortcut,
 }) => {
   return (
-    <Hint label={label} side="bottom" sideOffset={10}>
+    <Hint label={label} side="bottom" sideOffset={10} shortcut={shortcut}>
       <Button
-        className={"px-1.5"}
+        className={"md:px-1.5 py-1.5"}
         disabled={isDisabled}
         onClick={onClick}
         size="icon"

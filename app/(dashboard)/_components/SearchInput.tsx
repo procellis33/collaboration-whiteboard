@@ -20,10 +20,12 @@ export const SearchInput = () => {
   };
 
   useEffect(() => {
+    const parsed = qs.parse(location.search);
     const url = qs.stringifyUrl(
       {
         url: "/",
         query: {
+          ...parsed,
           search: deferredSearchQuery,
         },
       },
@@ -41,7 +43,7 @@ export const SearchInput = () => {
       />
       <Input
         className={
-          "w-full pl-9 pr-9 focus-visible:ring-indigo-300 focus-visible:ring-offset-0 focus-visible:ring"
+          "w-full pl-9 pr-9 focus-visible:ring-indigo-300 focus-visible:ring-offset-0 focus-visible:ring dark:bg-zinc-900 h-[46px]"
         }
         placeholder={"Search boards"}
         onChange={handleChange}

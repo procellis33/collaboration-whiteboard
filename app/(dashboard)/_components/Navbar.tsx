@@ -1,14 +1,14 @@
-// "use client";
+"use client";
 import {
   OrganizationSwitcher,
   UserButton,
   // useOrganization,
 } from "@clerk/nextjs";
 import { SearchInput } from "@/app/(dashboard)/_components/SearchInput";
-// import { InviteButton } from "@/app/(dashboard)/_components/sidebar/InviteButton";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
-  // const { organization } = useOrganization();
+  const { theme } = useTheme();
   return (
     <div className={"flex items-center gap-x-4 p-5"}>
       <div className={"hidden lg:flex lg:flex-1"}>
@@ -32,13 +32,12 @@ const Navbar = () => {
                 borderRadius: "8px",
                 border: "1px solid #E5E7EB",
                 justifyContent: "space-between",
-                backgroundColor: "white",
+                backgroundColor: theme === "dark" ? undefined : "white",
               },
             },
           }}
         />
       </div>
-      {/*{organization && <InviteButton />}*/}
       <UserButton />
     </div>
   );

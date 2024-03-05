@@ -7,6 +7,7 @@ import { useOrganization } from "@clerk/nextjs";
 import { useApiMutation } from "@/hooks/useApiMutation";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { BOARD_CREATE_SUCCESS, DEFAULT_BOARD_NAME } from "@/lib/consts";
 
 export const EmptyData = () => {
   const router = useRouter();
@@ -17,10 +18,10 @@ export const EmptyData = () => {
     if (!organization) return;
     mutate({
       orgId: organization.id,
-      title: "Untitled",
+      title: DEFAULT_BOARD_NAME,
     })
       .then((id) => {
-        toast.success("Board created");
+        toast.success(BOARD_CREATE_SUCCESS);
         router.push(`/board/${id}`);
       })
       .catch((e) => toast.error(e.message));

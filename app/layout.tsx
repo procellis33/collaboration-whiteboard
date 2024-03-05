@@ -5,6 +5,7 @@ import React from "react";
 import { ConvexClientProvider } from "@/providers/ConvexClientProvider";
 import { Toaster } from "@/components/ui/sonner";
 import { ModalProvider } from "@/providers/ModalProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,12 +22,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ConvexClientProvider>
-          <Toaster />
-          <ModalProvider />
-          {children}
-        </ConvexClientProvider>
+      <body className={`${inter.className} dark:bg-zinc-900`}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ConvexClientProvider>
+            <Toaster className={"dark:bg-zinc-950"} />
+            <ModalProvider />
+            {children}
+          </ConvexClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

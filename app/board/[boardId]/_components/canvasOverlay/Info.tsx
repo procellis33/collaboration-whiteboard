@@ -7,7 +7,7 @@ import { AlignJustify } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { Actions } from "@/components/Actions";
+import { Actions, EMode } from "@/components/Actions";
 
 interface IInfoProps {
   boardId: string;
@@ -21,10 +21,11 @@ export const Info: React.FC<IInfoProps> = ({ boardId }) => {
   return (
     <div
       className={
-        "absolute top-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center"
+        "absolute top-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center dark:bg-zinc-800"
       }
     >
       <Actions
+        mode={EMode.Canvas}
         id={data._id}
         title={data.title}
         side={"right"}
@@ -48,7 +49,7 @@ export const InfoSkeleton: React.FC = () => {
   return (
     <div
       className={
-        "absolute top-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md animate-pulse w-[47px]"
+        "absolute top-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md animate-pulse w-[47px] dark:bg-zinc-800"
       }
     />
   );

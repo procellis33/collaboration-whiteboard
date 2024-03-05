@@ -12,9 +12,9 @@ interface IZoomProps {
 }
 
 export const Zoom: React.FC<IZoomProps> = ({ setScale, scale }) => {
-  const resetZoom = () => {
+  const resetZoom = useCallback(() => {
     setScale(1);
-  };
+  }, [setScale]);
 
   const zoomIn = useCallback(() => {
     setScale((scale) => {
@@ -38,20 +38,30 @@ export const Zoom: React.FC<IZoomProps> = ({ setScale, scale }) => {
     });
   }, [setScale]);
 
-  useZoom({ zoomIn, zoomOut });
+  useZoom({ zoomIn, zoomOut, resetZoom });
 
   return (
     <div
       className={
-        "absolute bottom-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center gap-x-1"
+        "absolute bottom-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center gap-x-1 dark:bg-zinc-800"
       }
     >
-      <Hint label={"Zoom In"} side="top" sideOffset={10}>
+      <Hint
+        label={"Zoom In"}
+        shortcut={"Ctrl/Cmd + Wheel Up/+"}
+        side="top"
+        sideOffset={10}
+      >
         <Button className={"p-2"} variant={"canvas"} onClick={zoomIn}>
           <ZoomIn />
         </Button>
       </Hint>
-      <Hint label={"Reset Zoom"} side="top" sideOffset={10}>
+      <Hint
+        label={"Reset Zoom"}
+        shortcut={"Ctrl/Cmd + 0"}
+        side="top"
+        sideOffset={10}
+      >
         <Button
           variant={"none"}
           className={"px-1.5 font-semibold min-w-16"}
@@ -63,7 +73,12 @@ export const Zoom: React.FC<IZoomProps> = ({ setScale, scale }) => {
           %
         </Button>
       </Hint>
-      <Hint label={"Zoom Out"} side="top" sideOffset={10}>
+      <Hint
+        label={"Zoom Out"}
+        shortcut={"Ctrl/Cmd + Wheel Down/-"}
+        side="top"
+        sideOffset={10}
+      >
         <Button className={"p-2"} variant={"canvas"} onClick={zoomOut}>
           <ZoomOut />
         </Button>
@@ -76,7 +91,7 @@ export const ZoomSkeleton: React.FC = () => {
   return (
     <div
       className={
-        "absolute bottom-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center gap-x-1 animate-pulse w-[159px]"
+        "absolute bottom-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center gap-x-1 animate-pulse w-[159px] dark:bg-zinc-800"
       }
     />
   );

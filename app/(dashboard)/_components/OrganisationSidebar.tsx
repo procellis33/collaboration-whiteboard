@@ -8,6 +8,8 @@ import { OrganizationSwitcher } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { LayoutDashboard, Star } from "lucide-react";
 import { useSearchParams } from "next/navigation";
+import { useModifyUrlParams } from "@/hooks/useModifyUrlParams";
+import { useTheme } from "next-themes";
 
 const font = Poppins({
   subsets: ["latin"],
@@ -17,6 +19,9 @@ const OrganisationSidebar = () => {
   const searchParams = useSearchParams();
 
   const favorites = searchParams.get("favorites");
+
+  const createQueryString = useModifyUrlParams();
+  const { theme } = useTheme();
 
   return (
     <div className={"hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5"}>
@@ -44,7 +49,7 @@ const OrganisationSidebar = () => {
               borderRadius: "8px",
               border: "1px solid #E5E7EB",
               justifyContent: "space-between",
-              backgroundColor: "white",
+              backgroundColor: theme === "dark" ? undefined : "white",
             },
             avatarBox: {
               backgroundColor: "transparent",
@@ -76,7 +81,7 @@ const OrganisationSidebar = () => {
           <Link
             href={{
               pathname: "/",
-              query: { favorites: true },
+              query: createQueryString(`favorites`, `${true}`),
             }}
           >
             <Star className={"h-4 w-4 mr-2"} />

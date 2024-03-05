@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useApiMutation } from "@/hooks/useApiMutation";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
+import { BOARD_RENAME_SUCCESS } from "@/lib/consts";
 
 export const RenameModal = () => {
   const { mutate, pending } = useApiMutation(api.board.update);
@@ -38,7 +39,7 @@ export const RenameModal = () => {
 
     mutate({ id: initialValues.id, title: title })
       .then(() => {
-        toast.success("Board renamed");
+        toast.success(BOARD_RENAME_SUCCESS);
         onClose();
       })
       .catch((e) => toast.error(e.message));
@@ -57,6 +58,7 @@ export const RenameModal = () => {
           <Input
             disabled={pending}
             required
+            className={"dark:bg-zinc-900"}
             maxLength={30}
             onChange={(e) => setTitle(e.target.value)}
             placeholder={"Board title"}
@@ -64,11 +66,19 @@ export const RenameModal = () => {
           />
           <DialogFooter className={"gap-2"}>
             <DialogClose asChild>
-              <Button type={"button"} variant={"outline"}>
+              <Button
+                type={"button"}
+                variant={"outline"}
+                className={"dark:bg-zinc-900 dark:hover:bg-zinc-950"}
+              >
                 Cancel
               </Button>
             </DialogClose>
-            <Button disabled={pending} type={"submit"}>
+            <Button
+              disabled={pending}
+              type={"submit"}
+              className={"dark:hover:opacity-[70%]"}
+            >
               Save
             </Button>
           </DialogFooter>
