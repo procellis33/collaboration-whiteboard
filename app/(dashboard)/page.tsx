@@ -15,7 +15,7 @@ const DashboardPage: React.FC<IDashboardPageProps> = ({ searchParams }) => {
   const { organization } = useOrganization();
 
   return (
-    <div className={"flex-1 h-[calc(100%-80px)] p-6"}>
+    <div className={"flex-1 h-[calc(100%-86px)] p-6"}>
       {!organization ? (
         <EmptyOrg />
       ) : (
