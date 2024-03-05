@@ -7,7 +7,7 @@ import { AlignJustify } from "lucide-react";
 import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-import { Actions } from "@/components/Actions";
+import { Actions, EMode } from "@/components/Actions";
 
 interface IInfoProps {
   boardId: string;
@@ -25,6 +25,7 @@ export const Info: React.FC<IInfoProps> = ({ boardId }) => {
       }
     >
       <Actions
+        mode={EMode.Canvas}
         id={data._id}
         title={data.title}
         side={"right"}
