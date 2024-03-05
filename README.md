@@ -2,6 +2,8 @@
 
 This repository is an application built with React, Next.js, and TypeScript.
 
+![Preview image](/public/preview/preview.png)
+
 - In this application, people can sign in with Google, create organizations, invite members to them, create organization whiteboards, and collaborate in real time with other members.
 
 - In whiteboard mode, members can insert layers, draw, and write text. Layers can be styled, translated, and resized. A layer's position can be changed: moved backward or forward. The whiteboard has a zoom option and is infinite.
