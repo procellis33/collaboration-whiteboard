@@ -12,9 +12,9 @@ interface IZoomProps {
 }
 
 export const Zoom: React.FC<IZoomProps> = ({ setScale, scale }) => {
-  const resetZoom = () => {
+  const resetZoom = useCallback(() => {
     setScale(1);
-  };
+  }, [setScale]);
 
   const zoomIn = useCallback(() => {
     setScale((scale) => {
@@ -38,7 +38,7 @@ export const Zoom: React.FC<IZoomProps> = ({ setScale, scale }) => {
     });
   }, [setScale]);
 
-  useZoom({ zoomIn, zoomOut });
+  useZoom({ zoomIn, zoomOut, resetZoom });
 
   return (
     <div
@@ -56,7 +56,6 @@ export const Zoom: React.FC<IZoomProps> = ({ setScale, scale }) => {
           <ZoomIn />
         </Button>
       </Hint>
-      <Hint label={"Reset Zoom"} side="top" sideOffset={10}>
       <Hint
         label={"Reset Zoom"}
         shortcut={"Ctrl/Cmd + 0"}
