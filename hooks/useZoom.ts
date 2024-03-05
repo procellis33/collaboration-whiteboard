@@ -4,27 +4,47 @@ import { useEffect } from "react";
 interface IUseZoom {
   zoomIn: () => void;
   zoomOut: () => void;
+  resetZoom: () => void;
 }
 
-const useZoom = ({ zoomIn, zoomOut }: IUseZoom) => {
+const useZoom = ({ zoomIn, zoomOut, resetZoom }: IUseZoom) => {
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent): void => {
-      if (event.ctrlKey && (event.key === "+" || event.key === "=")) {
-        event.preventDefault();
-        zoomIn();
-      } else if (event.ctrlKey && event.key === "-") {
-        event.preventDefault();
-        zoomOut();
+    const handleKeyDown = (e: KeyboardEvent): void => {
+      switch (e.key) {
+        case "=":
+        case "+":
+          {
+            if (e.ctrlKey || e.metaKey) {
+              e.preventDefault();
+              zoomIn();
+            }
+          }
+          break;
+        case "-":
+          {
+            if (e.ctrlKey || e.metaKey) {
+              e.preventDefault();
+              zoomOut();
+            }
+          }
+          break;
+        case "0":
+          {
+            if (e.ctrlKey || e.metaKey) {
+              resetZoom();
+            }
+          }
+          break;
       }
     };
 
-    const handleOnWheel = (event: WheelEvent): void => {
-      if (event.ctrlKey) {
-        if (event.deltaY > 0) {
-          event.preventDefault();
+    const handleOnWheel = (e: WheelEvent): void => {
+      if (e.ctrlKey || e.metaKey) {
+        if (e.deltaY > 0) {
+          e.preventDefault();
           zoomOut();
-        } else if (event.deltaY < 0) {
-          event.preventDefault();
+        } else if (e.deltaY < 0) {
+          e.preventDefault();
           zoomIn();
         }
       }
@@ -37,7 +57,7 @@ const useZoom = ({ zoomIn, zoomOut }: IUseZoom) => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("wheel", handleOnWheel);
     };
-  }, [zoomIn, zoomOut]);
+  }, [zoomIn, zoomOut, resetZoom]);
 };
 
 export default useZoom;
