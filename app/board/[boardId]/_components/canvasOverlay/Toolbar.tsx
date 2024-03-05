@@ -22,7 +22,7 @@ export const Toolbar: React.FC<IToolbarProps> = ({
   return (
     <div
       className={
-        "absolute left-[50%] -translate-x-[50%] h-canvas top-2 flex flex-row bg-white rounded-md p-1 gap-x-0.5 items-center shadow-md"
+        "absolute md:left-[50%] md:-translate-x-[50%] md:h-canvas md:top-2 flex md:flex-row bg-white rounded-md p-1 md:gap-x-0.5 items-center shadow-md dark:bg-zinc-800 flex-col right-2 bottom-1/2 translate-y-1/2 md:translate-y-0 gap-y-0.5 md:w-[258px]"
       }
     >
       <ToolButton
@@ -116,7 +116,7 @@ export const ToolbarSkeleton: React.FC = () => {
   return (
     <div
       className={
-        "absolute left-[50%] -translate-x-[50%] h-canvas top-2 flex flex-row bg-white rounded-md p-1 gap-x-0.5 items-center shadow-md w-[258px] animate-pulse"
+        "absolute md:left-1/2 md:-translate-x-1/2 md:h-canvas md:top-2 flex flex-row bg-white rounded-md p-1 md:gap-x-0.5 items-center shadow-md md:w-[258px] animate-pulse dark:bg-zinc-800 sm:right-2 sm:bottom-1/2 sm:h-[258px] sm:w-[48px] translate-y-1/2 md:translate-y-0"
       }
     />
   );
