@@ -52,6 +52,7 @@ export const SelectionBox: React.FC<ISelectionBoxPros> = memo(
               }}
               onPointerDown={(e) => {
                 e.stopPropagation();
+                onResizePointerDown(ESide.Top + ESide.Left, bounds);
               }}
             />
             <rect
@@ -66,6 +67,7 @@ export const SelectionBox: React.FC<ISelectionBoxPros> = memo(
               }}
               onPointerDown={(e) => {
                 e.stopPropagation();
+                onResizePointerDown(ESide.Top, bounds);
               }}
             />
             <rect
@@ -80,6 +82,7 @@ export const SelectionBox: React.FC<ISelectionBoxPros> = memo(
               }}
               onPointerDown={(e) => {
                 e.stopPropagation();
+                onResizePointerDown(ESide.Top + ESide.Right, bounds);
               }}
             />
             <rect
@@ -94,6 +97,7 @@ export const SelectionBox: React.FC<ISelectionBoxPros> = memo(
               }}
               onPointerDown={(e) => {
                 e.stopPropagation();
+                onResizePointerDown(ESide.Bottom + ESide.Left, bounds);
               }}
             />
             <rect
@@ -108,6 +112,7 @@ export const SelectionBox: React.FC<ISelectionBoxPros> = memo(
               }}
               onPointerDown={(e) => {
                 e.stopPropagation();
+                onResizePointerDown(ESide.Bottom, bounds);
               }}
             />
             <rect
@@ -122,6 +127,7 @@ export const SelectionBox: React.FC<ISelectionBoxPros> = memo(
               }}
               onPointerDown={(e) => {
                 e.stopPropagation();
+                onResizePointerDown(ESide.Bottom + ESide.Right, bounds);
               }}
             />
 
@@ -137,6 +143,7 @@ export const SelectionBox: React.FC<ISelectionBoxPros> = memo(
               }}
               onPointerDown={(e) => {
                 e.stopPropagation();
+                onResizePointerDown(ESide.Left, bounds);
               }}
             />
             <rect
@@ -151,6 +158,7 @@ export const SelectionBox: React.FC<ISelectionBoxPros> = memo(
               }}
               onPointerDown={(e) => {
                 e.stopPropagation();
+                onResizePointerDown(ESide.Right, bounds);
               }}
             />
           </>
