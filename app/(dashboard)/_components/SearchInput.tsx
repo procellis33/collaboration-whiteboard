@@ -20,10 +20,12 @@ export const SearchInput = () => {
   };
 
   useEffect(() => {
+    const parsed = qs.parse(location.search);
     const url = qs.stringifyUrl(
       {
         url: "/",
         query: {
+          ...parsed,
           search: deferredSearchQuery,
         },
       },
