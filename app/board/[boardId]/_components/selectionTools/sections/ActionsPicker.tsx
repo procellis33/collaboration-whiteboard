@@ -7,7 +7,7 @@ import { useLayerOrder } from "@/hooks/useLayerOrder";
 import { useLayerActions } from "@/hooks/useLayerActions";
 
 export const ActionsPicker: React.FC = () => {
-  const { sendToBack, bringToFront, selection: as1 } = useLayerOrder();
+  const { sendToBack, bringToFront } = useLayerOrder();
   const { deleteLayers } = useLayerActions();
 
   return (
