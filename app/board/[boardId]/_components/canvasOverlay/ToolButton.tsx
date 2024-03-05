@@ -23,7 +23,7 @@ export const ToolButton: React.FC<TToolButtonProps> = ({
   return (
     <Hint label={label} side="bottom" sideOffset={10} shortcut={shortcut}>
       <Button
-        className={"px-1.5"}
+        className={"md:px-1.5 py-1.5"}
         disabled={isDisabled}
         onClick={onClick}
         size="icon"
