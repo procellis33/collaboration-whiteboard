@@ -1,36 +1,38 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Collaborative Whiteboard
 
-## Getting Started
+This repository is an application built with React, Next.js, and TypeScript.
 
-First, run the development server:
+- In this application, people can sign in with Google, create organizations, invite members to them, create organization whiteboards, and collaborate in real time with other members.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- In whiteboard mode, members can insert layers, draw, and write text. Layers can be styled, translated, and resized. A layer's position can be changed: moved backward or forward. The whiteboard has a zoom option and is infinite.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Users can move the camera when the wheel is pressed or with the scroll. Shortcuts are also available. Each button has hints indicating what it does, and many buttons have shortcuts.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Additional technologies used: Clerk - authentication, shadcn/ui - components, Convex - backend, Liveblocks - real-time blocks in the whiteboard, Tailwind, Zustand, etc.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- [Click here to see an app and all its features showcased on YouTube](https://youtu.be/43_2mJxDjWY)
 
-## Learn More
+## Running application locally
 
-To learn more about Next.js, take a look at the following resources:
+To run the application on your local machine, follow these steps:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Clone this repository.
+- Install dependencies by running `npm install`.
+- Add .env.local with these values:
+  - CONVEX_DEPLOYMENT,
+  - NEXT_PUBLIC_CONVEX_URL,
+  - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
+  - CLERK_SECRET_KEY,
+  - NEXT_PUBLIC_LIVEBLOCKS_PUBLIC_API_KEY,
+  - LIVEBLOCKS_SECRET_KEY
+- Connect backend server with `npx convex dev`.
+- Start the development server with `npm run dev`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Documentation
 
-## Deploy on Vercel
+Here are some useful scripts you can run:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `npm run dev`: Builds development version.
+- `npx convex dev`: Connects to backend server.
+- `npm run format:fix`: Runs Prettier to format the code.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
