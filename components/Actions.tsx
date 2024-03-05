@@ -17,6 +17,19 @@ import { Button } from "@/components/ui/button";
 import { useRenameModal } from "@/store/useRenameModal";
 import { useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
+import {
+  BOARD_DELETE_SUCCESS,
+  FAILED_COPY_LINK_ERROR,
+  GITHUB_LINK,
+  LINK_COPY_SUCCESS,
+  PORTFOLIO_LINK,
+} from "@/lib/consts";
+import Image from "next/image";
+import { useTheme } from "next-themes";
+
+export enum EMode {
+  Canvas,
+}
 
 interface IActionProps {
   id: Id<"boards">;
@@ -49,15 +62,15 @@ export const Actions: React.FC<IActionProps> = ({
   const onCopyLink = () => {
     navigator.clipboard
       .writeText(`${window.location.origin}/board/${id}`)
-      .then(() => toast.success("Link copied"))
-      .catch(() => toast.error("Failed to copy link"));
+      .then(() => toast.success(LINK_COPY_SUCCESS))
+      .catch(() => toast.error(FAILED_COPY_LINK_ERROR));
   };
 
   const onDelete = () => {
     mutate({ id })
       .then(() => {
-        toast.success("Board deleted");
-        if (redirectHomeOnDelete) router.replace("/");
+        toast.success(BOARD_DELETE_SUCCESS);
+        if (redirectHomeOnDelete) router.push("/");
       })
       .catch((e) => toast.error(e.message));
   };

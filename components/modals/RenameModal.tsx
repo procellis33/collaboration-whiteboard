@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button";
 import { useApiMutation } from "@/hooks/useApiMutation";
 import { api } from "@/convex/_generated/api";
 import { toast } from "sonner";
+import { BOARD_RENAME_SUCCESS } from "@/lib/consts";
 
 export const RenameModal = () => {
   const { mutate, pending } = useApiMutation(api.board.update);
@@ -38,7 +39,7 @@ export const RenameModal = () => {
 
     mutate({ id: initialValues.id, title: title })
       .then(() => {
-        toast.success("Board renamed");
+        toast.success(BOARD_RENAME_SUCCESS);
         onClose();
       })
       .catch((e) => toast.error(e.message));
