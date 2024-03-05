@@ -16,7 +16,12 @@ export const Room: React.FC<IRoomProps> = ({ roomId, children, fallback }) => {
   return (
     <RoomProvider
       id={roomId}
-      initialPresence={{ cursor: null, selection: [] }}
+      initialPresence={{
+        cursor: null,
+        selection: [],
+        penColor: null,
+        pencilDraft: null,
+      }}
       initialStorage={{
         layers: new LiveMap<string, LiveObject<TLayer>>(),
         layerIds: new LiveList(),
