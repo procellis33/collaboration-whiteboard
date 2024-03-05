@@ -23,12 +23,14 @@ export const HistoryActions: React.FC<IHistoryActionsProps> = ({
     >
       <ToolButton
         label="Undo"
+        shortcut={"Ctrl/Cmd + Z"}
         icon={Undo}
         onClick={undo}
         isDisabled={!canUndo}
       />
       <ToolButton
         label="Redo"
+        shortcut={"Ctrl/Cmd + Shift + Z"}
         icon={Redo}
         onClick={redo}
         isDisabled={!canRedo}
