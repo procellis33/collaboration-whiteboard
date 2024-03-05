@@ -26,7 +26,7 @@ export const Footer: React.FC<IFooterProps> = ({
   };
 
   return (
-    <div className={"relative bg-white p-3"}>
+    <div className={"relative bg-white p-3 dark:bg-muted/70"}>
       <p className={"text-[13px] truncate max-w-[calc(100%-20px)]"}>{title}</p>
       <p
         className={

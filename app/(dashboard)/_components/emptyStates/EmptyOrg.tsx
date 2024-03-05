@@ -14,7 +14,9 @@ export const EmptyOrg = () => {
         <DialogTrigger asChild className={"mt-6"}>
           <Button size={"lg"}>Create organization</Button>
         </DialogTrigger>
-        <DialogContent className={"p-0 border-none max-w-[480px] bg-white"}>
+        <DialogContent
+          className={"p-0 border-none max-w-[480px] bg-white dark:bg-zinc-900"}
+        >
           <CustomCreateOrg />
         </DialogContent>
       </Dialog>
