@@ -4,6 +4,7 @@ import { ParticipantsSkeleton } from "@/app/board/[boardId]/_components/canvasOv
 import { ToolbarSkeleton } from "@/app/board/[boardId]/_components/canvasOverlay/Toolbar";
 import { HistoryActionsSkeleton } from "@/app/board/[boardId]/_components/canvasOverlay/HistoryActions";
 import { ZoomSkeleton } from "@/app/board/[boardId]/_components/canvasOverlay/Zoom";
+import { LayerSettingsSkeleton } from "@/app/board/[boardId]/_components/canvasOverlay/LayerSettings";
 
 export const CanvasLoading = () => {
   return (
@@ -18,6 +19,7 @@ export const CanvasLoading = () => {
       <ParticipantsSkeleton />
       <ToolbarSkeleton />
       <ZoomSkeleton />
+      <LayerSettingsSkeleton />
     </main>
   );
 };
