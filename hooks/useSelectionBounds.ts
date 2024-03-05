@@ -1,3 +1,4 @@
+"use client";
 import { TLayer, TXYWH } from "@/types/canvas";
 import { useSelf, useStorage } from "@/liveblocks.config";
 import { shallow } from "@liveblocks/react";
@@ -11,7 +12,6 @@ const boundingBox = (layers: TLayer[]): TXYWH | null => {
   let right = first.x + first.width;
   let top = first.y;
   let bottom = first.y + first.height;
-
   layers.forEach((layer) => {
     const { x, y, width, height } = layer;
     if (left > x) {
@@ -24,7 +24,7 @@ const boundingBox = (layers: TLayer[]): TXYWH | null => {
       top = y;
     }
     if (bottom < y + height) {
-      bottom = y + width;
+      bottom = y + height;
     }
   });
 
