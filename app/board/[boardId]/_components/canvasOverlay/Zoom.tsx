@@ -43,7 +43,7 @@ export const Zoom: React.FC<IZoomProps> = ({ setScale, scale }) => {
   return (
     <div
       className={
-        "absolute bottom-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center gap-x-1"
+        "absolute bottom-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center gap-x-1 dark:bg-zinc-800"
       }
     >
       <Hint label={"Zoom In"} side="top" sideOffset={10}>
@@ -76,7 +76,7 @@ export const ZoomSkeleton: React.FC = () => {
   return (
     <div
       className={
-        "absolute bottom-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center gap-x-1 animate-pulse w-[159px]"
+        "absolute bottom-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center gap-x-1 animate-pulse w-[159px] dark:bg-zinc-800"
       }
     />
   );

@@ -18,7 +18,7 @@ export const HistoryActions: React.FC<IHistoryActionsProps> = ({
   return (
     <div
       className={
-        "absolute left-[180px] h-canvas px-canvas bottom-2 bg-white rounded-md p-1 flex gap-x-0.5 flex-row items-center shadow-md"
+        "absolute left-[180px] h-canvas px-canvas bottom-2 bg-white rounded-md p-1 flex gap-x-0.5 flex-row items-center shadow-md dark:bg-zinc-800"
       }
     >
       <ToolButton
@@ -41,7 +41,7 @@ export const HistoryActionsSkeleton: React.FC = () => {
   return (
     <div
       className={
-        "absolute left-[180px] h-canvas px-canvas bottom-2 bg-white rounded-md p-1 flex gap-x-0.5 flex-row items-center shadow-md animate-pulse w-[90px]"
+        "absolute left-[180px] h-canvas px-canvas bottom-2 bg-white rounded-md p-1 flex gap-x-0.5 flex-row items-center shadow-md animate-pulse w-[90px] dark:bg-zinc-800"
       }
     />
   );

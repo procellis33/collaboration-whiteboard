@@ -58,6 +58,7 @@ export const RenameModal = () => {
           <Input
             disabled={pending}
             required
+            className={"dark:bg-zinc-900"}
             maxLength={30}
             onChange={(e) => setTitle(e.target.value)}
             placeholder={"Board title"}
@@ -65,11 +66,19 @@ export const RenameModal = () => {
           />
           <DialogFooter className={"gap-2"}>
             <DialogClose asChild>
-              <Button type={"button"} variant={"outline"}>
+              <Button
+                type={"button"}
+                variant={"outline"}
+                className={"dark:bg-zinc-900 dark:hover:bg-zinc-950"}
+              >
                 Cancel
               </Button>
             </DialogClose>
-            <Button disabled={pending} type={"submit"}>
+            <Button
+              disabled={pending}
+              type={"submit"}
+              className={"dark:hover:opacity-[70%]"}
+            >
               Save
             </Button>
           </DialogFooter>

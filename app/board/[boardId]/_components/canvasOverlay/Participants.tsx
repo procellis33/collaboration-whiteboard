@@ -13,7 +13,7 @@ export const Participants: React.FC = () => {
   return (
     <div
       className={
-        "absolute top-2 right-2 bg-white rounded-md p-3 h-canvas flex items-center shadow-md"
+        "absolute top-2 right-2 bg-white rounded-md p-3 h-canvas flex items-center shadow-md dark:bg-zinc-800"
       }
     >
       <div className={"flex gap-x-2"}>
@@ -53,7 +53,7 @@ export const ParticipantsSkeleton: React.FC = () => {
   return (
     <div
       className={
-        "absolute top-2 right-2 bg-white rounded-md p-3 h-canvas flex items-center shadow-md w-[70px] animate-pulse"
+        "absolute top-2 right-2 bg-white rounded-md p-3 h-canvas flex items-center shadow-md w-[70px] animate-pulse dark:bg-zinc-800"
       }
     />
   );

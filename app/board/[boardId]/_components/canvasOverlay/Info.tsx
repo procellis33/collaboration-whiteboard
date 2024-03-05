@@ -21,7 +21,7 @@ export const Info: React.FC<IInfoProps> = ({ boardId }) => {
   return (
     <div
       className={
-        "absolute top-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center"
+        "absolute top-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md flex items-center dark:bg-zinc-800"
       }
     >
       <Actions
@@ -48,7 +48,7 @@ export const InfoSkeleton: React.FC = () => {
   return (
     <div
       className={
-        "absolute top-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md animate-pulse w-[47px]"
+        "absolute top-2 left-2 bg-white rounded-md px-canvas h-canvas shadow-md animate-pulse w-[47px] dark:bg-zinc-800"
       }
     />
   );
