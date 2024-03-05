@@ -1,26 +1,22 @@
-import { TRectangleLayer } from "@/types/canvas";
+import { TEllipseLayer } from "@/types/canvas";
 import React from "react";
 import { rgbToHex } from "@/lib/utils/rgbToHex";
 import { INITIAL_LAYER_STROKE_COLOR } from "@/lib/consts";
 
-interface IRectangleProps {
+interface IEllipseProps {
   id: string;
-  layer: TRectangleLayer;
+  layer: TEllipseLayer;
   onPointerDown: (e: React.PointerEvent, id: string) => void;
   selectionColor?: string;
 }
 
-export const Rectangle: React.FC<IRectangleProps> = ({
+export const Ellipse: React.FC<IEllipseProps> = ({
   id,
   selectionColor,
   layer,
   onPointerDown,
 }) => {
   const {
-    x,
-    y,
-    width,
-    height,
     fill,
     fillOpacity,
     strokeOpacity,
@@ -32,14 +28,14 @@ export const Rectangle: React.FC<IRectangleProps> = ({
   return (
     <>
       {strokeOpacity !== 0 && (
-        <rect
+        <ellipse
           style={{
-            transform: `translate(${x}px, ${y}px)`,
+            transform: `translate(${layer.x}px, ${layer.y}px)`,
           }}
-          x={0}
-          y={0}
-          width={width}
-          height={height}
+          cx={layer.width / 2}
+          cy={layer.height / 2}
+          rx={layer.width / 2}
+          ry={layer.height / 2}
           strokeWidth={strokeWidth}
           fillOpacity={0}
           strokeDasharray={strokeDasharray}
@@ -47,16 +43,16 @@ export const Rectangle: React.FC<IRectangleProps> = ({
           stroke={rgbToHex(stroke || INITIAL_LAYER_STROKE_COLOR)}
         />
       )}
-      <rect
+      <ellipse
         className="drop-shadow-md cursor-all-scroll"
         onPointerDown={(e) => onPointerDown(e, id)}
         style={{
-          transform: `translate(${x}px, ${y}px)`,
+          transform: `translate(${layer.x}px, ${layer.y}px)`,
         }}
-        x={0}
-        y={0}
-        width={width}
-        height={height}
+        cx={layer.width / 2}
+        cy={layer.height / 2}
+        rx={layer.width / 2}
+        ry={layer.height / 2}
         strokeWidth={1}
         fillOpacity={fillOpacity}
         fill={rgbToHex(fill)}
